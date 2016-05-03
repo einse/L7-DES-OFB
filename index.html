@@ -45,45 +45,6 @@
       <button ng-click="eCopy2(cypher_ascii_numbers_d)">Скопировать из "Результата шифрования"</button>
       <table class="table hidden">
         <tr>
-          <th>{{ test_block = [
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,1,1,0
-          ] }} - buff-1</th>
-        </tr>
-        <tr>
-          <th>{{ des(test_block, key_64) }} - cbuff-1</th>
-        </tr>
-        <tr>
-          <th>{{ tb_64_2 = add(test_block, [0,0,0,1]) }} - buff-2</th>
-        </tr>
-        <tr>
-          <th>{{ des(tb_64_2, key_64) }} - cbuff-2</th>
-        </tr>
-        
-        <!--
-        <tr>
-          <th>{{ test_block = [
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-          0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0
-          ] }} - buff-1</th>
-        </tr>
-        <tr>
-          <th>{{ des(test_block, key_64) }} - cbuff-1</th>
-        </tr>
-        <tr>
-          <th>{{ tb_64_2 = add(test_block, [0,1,1,0]) }} - buff-2</th>
-        </tr>
-        <tr>
-          <th>{{ des(tb_64_2, key_64) }} - cbuff-2</th>
-        </tr>
-        -->
-      </table>
-      <table class="table hidden">
-        <tr>
           <th>Юникод</th>
           <th>ASCII-код</th>
         </tr>
@@ -104,31 +65,12 @@
         <tr>
           <th>{{ msg_bits_pure_d = blocks2pure(msg_bits_8_d) }}</th>
         </tr>
-<!--        <tr>
-          <th>{{ msg_bits_pure_d_2 = cut(msg_bits_pure_d, small_k_parsed) }} - cut</th>
-        </tr>-->
         <tr>
           <th>{{ msg_bits_blocks_d = pure2blocks(small_k_parsed, msg_bits_pure_d) }}</th>
         </tr>
         <tr>
-          <th>{{ cypher_bits_pure_d = ePure(msg_bits_blocks_d, key_64, c0_64, small_k_parsed) }} - шифр-текст, pure</th>
+          <th>{{ cypher_bits_pure_d = e(msg_bits_blocks_d, key_64, c0_64, small_k_parsed) }} - шифр-текст, pure</th>
         </tr>
-        
-        
-        <!--
-        
-        <tr>
-          <th>{{ msg_bits_64_d = pure2blocks(64, msg_bits_pure_d) }} - исходное сообщение, блоки по 64 бита</th>
-        </tr>
-        <tr>
-          <th>{{ cypher_bits_64_d = e(msg_bits_64_d, key_64, c0_64) }} - шифр-текст, блоки по 64 бита</th>
-        </tr>
-        <tr>
-          <th>{{ cypher_bits_pure_d = blocks2pure(cypher_bits_64_d) }}</th>
-        </tr>
-        
-        -->
-        
         <tr>
           <th>{{ cypher_bits_8_d = pure2blocks(8, cypher_bits_pure_d) }}</th>
         </tr>
@@ -144,7 +86,6 @@
       </table>
       <h2>II. Поле для ввода шифра</h2>
       <textarea ng-model="cypher_d" ng-init="cypher_d=''" placeholder="Вставьте ASCII-коды символов шифра."></textarea>
-      <!--<button ng-click="dAction()">Расшифровать</button>-->
       <button ng-click="dCopy2(cypher_ascii_numbers_d)">Скопировать из "Результата шифрования"</button>
       <button ng-click="dCopy2(m2_ascii_numbers_d)">Скопировать из "Результата дешифровки"</button>
       <button ng-click="dClear2()">Очистить</button>
@@ -166,23 +107,8 @@
         </tr>
         
         <tr>
-          <th>{{ m2_bits_pure_d = dPure(c2_bits_blocks_d, key_64, c0_64, small_k_parsed) }} - открытый текст, pure </th>
+          <th>{{ m2_bits_pure_d = d(c2_bits_blocks_d, key_64, c0_64, small_k_parsed) }} - открытый текст, pure </th>
         </tr>
-        
-        <!-- 
-        
-        <tr>
-          <th>{{ c2_bits_64_d = pure2blocks(64, c2_bits_pure_d) }} - шифр-текст, блоки по 64 бита</th>
-        </tr>
-        <tr>
-          <th>{{ m2_bits_64_d = d(c2_bits_64_d, key_64, c0_64) }} - открытый текст, блоки по 64 бита</th>
-        </tr>
-        <tr>
-          <th>{{ m2_bits_pure_d = blocks2pure(m2_bits_64_d) }}</th>
-        </tr>
-        
-        -->
-        
         <tr>
           <th>{{ m2_bits_8_d = pure2blocks(8, m2_bits_pure_d) }}</th>
         </tr>

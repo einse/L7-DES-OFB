@@ -1103,18 +1103,6 @@ app.controller('myCtrl', function($scope) {
     return cypher_block_64;
   }
   
-  $scope.e = function(msg_blocks_64_bit, main_key, c0) {
-    var cypher_blocks_64_bit = [];
-    var buff = c0;
-    for (var i = 0; i < msg_blocks_64_bit.length; i++) {
-      var one_block = $scope.modSum(msg_blocks_64_bit[i], buff);
-      one_block = $scope.des(one_block, main_key);
-      buff = one_block;
-      cypher_blocks_64_bit.push(one_block);
-    }
-    return cypher_blocks_64_bit;
-  }
-  
   $scope.cut = function(block_64, n) {
     var cutted = [];
     for (var i = 0; i < n; i++) {
@@ -1135,8 +1123,7 @@ app.controller('myCtrl', function($scope) {
     return block_new;
   }
   
-  $scope.ePure = function(msg_blocks_k, main_key, c0, small_k) {
-    // var msg_blocks_k = $scope.pure2blocks(small_k, msg_pure);
+  $scope.e = function(msg_blocks_k, main_key, c0, small_k) {
     var cypher_blocks_k = [];
     var buff = c0;
     var cbuff = [];
@@ -1149,7 +1136,6 @@ app.controller('myCtrl', function($scope) {
       cypher_blocks_k.push(one_block_k);
       buff = $scope.add(buff, block_k);
     }
-    // cypher_blocks_k -> cypher_blocks_pure
     var cypher_blocks_pure = $scope.blocks2pure(cypher_blocks_k);
     return cypher_blocks_pure;
   }
@@ -1200,21 +1186,8 @@ app.controller('myCtrl', function($scope) {
     msg_block_64 = ipm1;
     return msg_block_64;
   }
-  
-  $scope.d = function(cypher_blocks_64_bit, main_key, c0) {
-    var msg_blocks_64_bit = [];
-    var buff = c0;
-    for (var i = 0; i < cypher_blocks_64_bit.length; i++) {
-      var one_block = $scope.desm1(cypher_blocks_64_bit[i], main_key);
-      one_block = $scope.modSum(one_block, buff);
-      msg_blocks_64_bit.push(one_block);
-      buff = cypher_blocks_64_bit[i];
-    }
-    return msg_blocks_64_bit;
-  }
 
-  $scope.dPure = function(cypher_blocks_k, main_key, c0, small_k) {
-    // var msg_blocks_k = $scope.pure2blocks(small_k, msg_pure);
+  $scope.d = function(cypher_blocks_k, main_key, c0, small_k) {
     var msg_blocks_k = [];
     var buff = c0;
     var cbuff = [];
@@ -1227,7 +1200,6 @@ app.controller('myCtrl', function($scope) {
       msg_blocks_k.push(one_block_k);
       buff = $scope.add(buff, block_k);
     }
-    // msg_blocks_k -> msg_blocks_pure
     var msg_blocks_pure = $scope.blocks2pure(msg_blocks_k);
     return msg_blocks_pure;
   }
